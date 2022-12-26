@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useState } from "react";
+// components
+import { App as AppComponent, Card } from "./components/styled-components";
+import BinaryCalc from "./components/BinaryCalc";
+import DecimalCalc from "./components/DecimalCalc";
+// context
+import { CartContext } from "./context/CalculatorContextProvider";
 
-function App() {
+const App = () => {
+  const [type, setType] = useState("decimal");
+  const { setResult } = useContext(CartContext);
+  document.addEventListener("keydown", (event) => {
+    if (event.key.toUpperCase() === "B") {
+      setType("binary");
+      setResult(0);
+    } else if (event.key.toUpperCase() === "D") {
+      setType("decimal");
+      setResult(0);
+    }
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppComponent>
+      <Card>{type === "decimal" ? <DecimalCalc /> : <BinaryCalc />}</Card>
+    </AppComponent>
   );
-}
+};
 
 export default App;
