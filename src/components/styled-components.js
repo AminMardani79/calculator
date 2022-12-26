@@ -59,3 +59,18 @@ export const BinaryLayout = styled.div`
   grid-template-columns: repeat(3, auto);
   gap: 6px;
 `;
+export const InfoComponent = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #142f44;
+  color: #fff;
+  width: 200px;
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;

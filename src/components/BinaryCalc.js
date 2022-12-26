@@ -10,11 +10,17 @@ import {
   binaryNumbers,
   operations,
 } from "../data/data";
+import { checkNumberLength } from "../helpers/validate";
 function BinaryCalc({ type }) {
   const { state, dispatch } = useContext(CalculateContext);
   const [number, setNumber] = useState("");
   const clickHandler = (event) => {
     if (binaryNumbers.includes(+event.target.innerHTML)) {
+      console.log(checkNumberLength(number));
+      if (checkNumberLength(number)) {
+        alert("number length is invalid. It should be less than 32 character");
+        return;
+      }
       setNumber((prev) => prev + event.target.innerHTML + "");
     }
     if (operations.includes(event.target.innerHTML)) {
@@ -28,7 +34,6 @@ function BinaryCalc({ type }) {
       setNumber("");
     }
   };
-  console.log(state);
   return (
     <BinaryLayout>
       <InputItem type={type}>
