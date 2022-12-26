@@ -12,29 +12,30 @@ import { CartContext } from "../context/CalculatorContextProvider";
 import { isReapetedOps } from "../helpers/validate";
 // data
 import { operations } from "../data/data";
+// operations
+import {
+  backSpace,
+  evalValue,
+  powNumber,
+  sqrtNumber,
+} from "../helpers/operation";
 
 function DecimalCalc() {
   const { calc, setCalc, result, setResult } = useContext(CartContext);
-
   const updateCalc = (value) => {
     if (isReapetedOps(value, calc)) {
       return;
     }
     setCalc(calc + value);
     if (!operations.includes(value)) {
-      // eslint-disable-next-line no-eval
-      setResult(eval(calc + value).toString());
+      setResult(evalValue(calc + value).toString());
     }
   };
   const calculate = () => {
-    // eslint-disable-next-line no-eval
-    setCalc(eval(calc).toString());
+    setCalc(evalValue(calc).toString());
   };
   const deleteHandler = () => {
-    if (calc === "") {
-      return;
-    }
-    const value = calc.slice(0, -1);
+    const value = backSpace(calc);
     setCalc(value);
   };
   const cleareHandler = () => {
@@ -42,14 +43,12 @@ function DecimalCalc() {
     setResult(0);
   };
   const rootHandler = () => {
-    // eslint-disable-next-line no-eval
-    setCalc(Math.sqrt(eval(calc)).toString());
-    setResult(Math.sqrt(result).toString());
+    setCalc(sqrtNumber(evalValue(calc)));
+    setResult(sqrtNumber(result));
   };
   const powHandler = () => {
-    // eslint-disable-next-line no-eval
-    setCalc(Math.pow(eval(calc), 2).toString());
-    setResult(Math.pow(result, 2).toString());
+    setCalc(powNumber(evalValue(calc)));
+    setResult(powNumber(result));
   };
   const createDigits = () => {
     const digits = [];
