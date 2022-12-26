@@ -8,19 +8,19 @@ import { CartContext } from "./context/CalculatorContextProvider";
 
 const App = () => {
   const [type, setType] = useState("decimal");
-  const { setResult } = useContext(CartContext);
+  const { setCalc } = useContext(CartContext);
   document.addEventListener("keydown", (event) => {
     if (event.key.toUpperCase() === "B") {
       setType("binary");
-      setResult(0);
+      setCalc("");
     } else if (event.key.toUpperCase() === "D") {
       setType("decimal");
-      setResult(0);
+      setCalc("");
     }
   });
   return (
     <AppComponent>
-      <Card>{type === "decimal" ? <DecimalCalc /> : <BinaryCalc />}</Card>
+      <Card>{type === "decimal" ? <DecimalCalc /> : <BinaryCalc />}</Card> 
     </AppComponent>
   );
 };
