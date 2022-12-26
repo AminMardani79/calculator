@@ -1,13 +1,8 @@
 import React, { useContext } from "react";
 // components
-import {
-  DecimalItem,
-  DecimalLayout,
-  DecimalInputItem,
-  Small,
-} from "./styled-components";
+import { Item, DecimalLayout, InputItem, Small } from "./styled-components";
 // context
-import { CartContext } from "../context/CalculatorContextProvider";
+import { CalculateContext } from "../context/CalculatorContextProvider";
 // validation
 import { isReapetedOps } from "../helpers/validate";
 // data
@@ -21,7 +16,7 @@ import {
 } from "../helpers/operation";
 
 function DecimalCalc() {
-  const { calc, setCalc, result, setResult } = useContext(CartContext);
+  const { calc, setCalc, result, setResult } = useContext(CalculateContext);
   const updateCalc = (value) => {
     if (isReapetedOps(value, calc)) {
       return;
@@ -54,30 +49,30 @@ function DecimalCalc() {
     const digits = [];
     for (let i = 0; i < 10; i++) {
       digits.push(
-        <DecimalItem onClick={() => updateCalc(i)} key={i}>
+        <Item onClick={() => updateCalc(i)} key={i}>
           {i}
-        </DecimalItem>
+        </Item>
       );
     }
     return digits;
   };
   return (
     <DecimalLayout>
-      <DecimalInputItem>
+      <InputItem>
         <Small>({result ? result : 0})</Small>
         {calc}
-      </DecimalInputItem>
+      </InputItem>
       {createDigits()}
       {operations.map((item) => (
-        <DecimalItem key={item} onClick={() => updateCalc(item)}>
+        <Item key={item} onClick={() => updateCalc(item)}>
           {item}
-        </DecimalItem>
+        </Item>
       ))}
-      <DecimalItem onClick={calculate}>=</DecimalItem>
-      <DecimalItem onClick={rootHandler}>√</DecimalItem>
-      <DecimalItem onClick={powHandler}>^</DecimalItem>
-      <DecimalItem onClick={cleareHandler}>CLear</DecimalItem>
-      <DecimalItem onClick={deleteHandler}>Delete</DecimalItem>
+      <Item onClick={calculate}>=</Item>
+      <Item onClick={rootHandler}>√</Item>
+      <Item onClick={powHandler}>^</Item>
+      <Item onClick={cleareHandler}>CLear</Item>
+      <Item onClick={deleteHandler}>Delete</Item>
     </DecimalLayout>
   );
 }

@@ -22,7 +22,7 @@ export const DecimalLayout = styled.div`
   grid-template-columns: repeat(4, auto);
   gap: 6px;
 `;
-export const DecimalItem = styled.div`
+export const Item = styled.div`
   padding: 5px;
   border-radius: 5px;
   background-color: #205b7a;
@@ -33,8 +33,8 @@ export const DecimalItem = styled.div`
   height: 70px;
   font-weight: bold;
 `;
-export const DecimalInputItem = styled.div`
-  grid-column: 1 / 6;
+export const InputItem = styled.div`
+  grid-column: ${(props) => (props.type === "binary" ? `1 / 4` : `1 / 6`)};
   width: 100%;
   height: 80px;
   border-radius: 5px;
@@ -52,4 +52,10 @@ export const Small = styled.span`
   position: relative;
   top: 6px;
   margin-right: 5px;
+`;
+export const BinaryLayout = styled.div`
+  padding: 5px 10px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 6px;
 `;
